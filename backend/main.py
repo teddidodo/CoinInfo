@@ -2,6 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response, status, HTTPException, Depends
+from starlette.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import get_db
 import model
@@ -9,6 +10,22 @@ import model
 load_dotenv()
 
 app = FastAPI()
+#: Configure CORS
+origins = [
+    "http://localhost:3000/",
+    "https://top-news-td.vercel.app",
+    "https://top-news-hck015lyd-teddidodo.vercel.app/"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 @app.get("/exchange_rate/eth")
 async def get_btc_exchange_rate(db: Session = Depends(get_db)):
