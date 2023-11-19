@@ -2,7 +2,8 @@ import requests
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response, status, HTTPException, Depends
-from starlette.middleware.cors import CORSMiddleware
+# from starlette.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import get_db
 import model
@@ -12,9 +13,8 @@ load_dotenv()
 app = FastAPI()
 #: Configure CORS
 origins = [
-    "http://localhost:3000/",
+    "http://localhost:3000",
     "https://top-news-td.vercel.app",
-    "https://top-news-hck015lyd-teddidodo.vercel.app/"
 ]
 
 app.add_middleware(
