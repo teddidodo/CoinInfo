@@ -4,13 +4,13 @@ import { Collapse, theme, Row, Col } from 'antd';
 
 const InfoCollapse = ({ coin, currency, current_price }) => {
     const { token } = theme.useToken();
-    const [showDivider, setShowDivider] = useState(false)
+    const [showDivider, setShowDivider] = useState(true)
     const [activeKey, setActiveKey] = useState([]);
     let current_value = (currency - 6.4 - 3.99).toFixed(5)
 
     const onCollapseChange = (keys) => {
         setActiveKey(keys);
-        setShowDivider(keys[0])
+        setShowDivider(!showDivider)
     };
     const panelStyle = {
         background: token.colorFillAlter,
@@ -23,7 +23,7 @@ const InfoCollapse = ({ coin, currency, current_price }) => {
             label:
                 <div
                     style={{
-                        borderBottom: showDivider ? '1px solid grey' : 'none', paddingBottom: '10px'
+                        borderBottom: showDivider ? '1px solid #E0E0E0' : 'none', paddingBottom: '10px'
                     }}>
                     You get <strong>{coin}</strong> ETH for ${current_value}
                 </div>,

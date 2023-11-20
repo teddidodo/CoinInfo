@@ -2,6 +2,7 @@ import React from 'react';
 import { FloatButton, Modal } from 'antd';
 import { useState } from 'react';
 import Chart from '../components/Chart';
+
 const ChartModal = () => {
     const [open, setOpen] = useState(false);
     const time = String(
@@ -26,7 +27,5 @@ const ChartModal = () => {
         </>
     )
 }
-
-
 
 export default ChartModal;

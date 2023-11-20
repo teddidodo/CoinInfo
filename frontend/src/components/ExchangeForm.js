@@ -10,7 +10,7 @@ const { Text } = Typography;
 const ExchangeForm = () => {
     const [data, setData] = useState(null)
     const [currency, setCurrency] = useState(300);
-    const [coin, setCoin] = useState((300 - 3.99 - 6.4)/1955.64);
+    const [coin, setCoin] = useState(((300 - 3.99 - 6.4)/1955.64).toFixed(5));
     const [error, setError] = useState('')
     const [error2, setError2] = useState('')
     const [countDown, setCountDown] = useState(10)
@@ -24,7 +24,7 @@ const ExchangeForm = () => {
             return
         }
         if (value < 30) {
-            setError('The minimum purchasable amount is $30 / 0.0115ETH')
+            setError('The minimum purchasable amount is $30')
             setCoin(0)
             return
         }
@@ -122,7 +122,7 @@ const ExchangeForm = () => {
                     controls={false}
                     suffix={
                         <AvatarButton
-                            avatar={'https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628'}
+                            avatar={'https://upload.wikimedia.org/wikipedia/commons/a/a9/Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg'}
                             coin={'USD'}
                         />
                     }
@@ -163,7 +163,7 @@ const ExchangeForm = () => {
                     <ArrowRightOutlined />
                 </Button>
                 <Text type='secondary'>
-                    By continuing you agree to our <a href=''>cookie policy</a>.
+                    By continuing you agree to our <a href='https://github.com/teddidodo/SwapUI'>cookie policy</a>.
                 </Text>
             </Form.Item>
         </Form>
@@ -171,7 +171,7 @@ const ExchangeForm = () => {
 };
 
 const inputStyle = {
-    backgroundColor: 'rgba(247, 247, 248, 1)',
+    backgroundColor: '#F7F7F8',
     paddingTop: '2%',
     height: '50px',
     width: '100%'
