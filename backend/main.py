@@ -2,19 +2,20 @@ import requests
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response, status, HTTPException, Depends
-# from starlette.middleware.cors import CORSMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import get_db
 import model
 
+from datetime import datetime, timedelta
 load_dotenv()
 
 app = FastAPI()
 #: Configure CORS
 origins = [
     "http://localhost:3000",
-    "https://top-news-td.vercel.app",
+    "https://fiatcryptoui.vercel.app",
+    'https://fiatcryptoui-teddidodo.vercel.app'
 ]
 
 app.add_middleware(
@@ -24,7 +25,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 
 @app.get("/exchange_rate/eth")
@@ -55,10 +55,17 @@ async def get_eth_price():
     headers = {
         'Content-Type': 'application/json'
     }
-
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return {"eth_price": response.json()}
+        data = response.json()
+        return {'eth': data[0]}
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch data")
     
+
+@app.get("/chart/exchange_rate")
+async def get_btc_exchange_rate(db: Session = Depends(get_db)):
+    start_date = datetime.utcnow() - timedelta(days=3)
+    end_date = datetime.utcnow()
+    rate_data = db.query(model.ExchangeRate.created_at, model.ExchangeRate.rate).filter(start_date <= model.ExchangeRate.created_at).filter(model.ExchangeRate.created_at <= end_date).all()
+    return {'rate': rate_data}
