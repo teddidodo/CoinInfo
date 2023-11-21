@@ -3,7 +3,8 @@ import ChartModal from './ChartModal';
 function Home() {
     return (
         <div className='App'>
-            <div className='card'> <SwapCard /></div>
+            <div className='card' 
+            > <SwapCard /></div>
             <ChartModal />
         </div>
     );

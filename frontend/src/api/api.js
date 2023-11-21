@@ -11,13 +11,17 @@ let API =  axios.create({
 export async function getPriceETH() {
     const ethPromise = await API.get('/eth-price')
     const response = ethPromise.data
-    console.log(response)
     return response
 }
 
 export async function getExchangeRateForChart() {
   const chartPromise = await API.get('/chart/exchange_rate')
   const response = chartPromise.data
-  console.log(response.rate)
   return response.rate
+}
+
+export async function getExchangeRate() {
+  const ethPromise = await API.get('/exchange_rate/eth')
+  const response = ethPromise.data
+  return response
 }

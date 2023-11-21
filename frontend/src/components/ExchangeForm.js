@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Typography } from 'antd'
-import { ArrowRightOutlined } from '@ant-design/icons'
+import { ArrowRightOutlined, FieldTimeOutlined } from '@ant-design/icons'
 import InfoCollapse from './InfoCollapse';
-import { getPriceETH } from '../api/api'
+import { getPriceETH, getExchangeRate } from '../api/api'
 import AvatarButton from './AvatarButton';
 import {convertUSD_ETH, convertETH_USD} from '../utils/calculate'
 const { Text } = Typography;
@@ -75,6 +75,7 @@ const ExchangeForm = () => {
     useEffect(() => {
         if (countDown === -1) {
             fetchData()
+            getExchangeRate()
             let newValue;
             if (valueTurn && !error) {
                 newValue = convertUSD_ETH(currency, data.current_price)
@@ -152,9 +153,9 @@ const ExchangeForm = () => {
 
             <Form.Item style={{ marginBottom: '4%' }}>
                 {(!error2 && !error) && <InfoCollapse coin={coin} currency={currency}  current_price={data?.current_price}/>}
-                {(!error2 && !error) && <p style={{ fontSize: '12px' }}>Quote updates in {`${seconds.toString().padStart(2)}`}s</p>}
-                {valueTurn && error && <p>{error}</p>}
-                {!valueTurn && error2 && <p>{error2}</p>}
+                {(!error2 && !error) && <p style={{ fontSize: '12px' }}><FieldTimeOutlined /> Quote updates in {`${seconds.toString().padStart(2)}`}s</p>}
+                {valueTurn && error && <p style={{color: 'red'}}>{error}</p>}
+                {!valueTurn && error2 && <p style={{color: 'red'}}>{error2}</p>}
             </Form.Item>
 
             <Form.Item>
@@ -162,7 +163,7 @@ const ExchangeForm = () => {
                     Continue
                     <ArrowRightOutlined />
                 </Button>
-                <Text type='secondary'>
+                <Text type='secondary' style={{fontSize: '12px'}}>
                     By continuing you agree to our <a href='https://github.com/teddidodo/SwapUI'>cookie policy</a>.
                 </Text>
             </Form.Item>
@@ -174,7 +175,9 @@ const inputStyle = {
     backgroundColor: '#F7F7F8',
     paddingTop: '2%',
     height: '50px',
-    width: '100%'
+    width: '100%',
+    fontSize: '20px',
+    fontWeight: 'bold'
 }
 const continueButton = { backgroundColor: 'rgba(125, 0, 255, 1)', width: '100%', marginBottom: '3%' }
 export default ExchangeForm;

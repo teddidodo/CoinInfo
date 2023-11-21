@@ -4,7 +4,8 @@ import { MenuOutlined } from '@ant-design/icons'
 import ExchangeForm from './ExchangeForm';
 
 const tabListNoTitle = [
-    { key: 'Buy', label: 'Buy' }, { key: 'Sell', label: 'Sell' }, { key: 'Swap', label: 'Swap' }
+    { key: 'Buy', 
+    label: <span style={{fontWeight: 'bold'}}>{'Buy'}</span>  }, { key: 'Sell', label: 'Sell' }, { key: 'Swap', label: 'Swap' }
 ];
 const contentListNoTitle = {
     Buy:  <ExchangeForm />
@@ -22,7 +23,7 @@ const SwapCard = () => {
                         <Image src='https://media.licdn.com/dms/image/D560BAQH3JRMy9Iwxog/company-logo_200_200/0/1690022679820/saola_labs_logo?e=2147483647&v=beta&t=TWh92AVpS5d68pQFL5qBVG3PPssTkjCGKV1ZP_MwCOg' width='11%' />
                     </div>
                     <Card
-                        style={{ width: '60%', marginLeft: '20%' }}
+                        style={{ width: '65%' ,marginLeft: '18%' }}
                         tabList={tabListNoTitle}
                         activeTabKey={activeTabKey2}
                         tabBarExtraContent={<MenuOutlined />}
