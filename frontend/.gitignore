@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# Ignore .test.js files
+*.test.js
+
 # production
 /build
 
